@@ -1,0 +1,9 @@
+{
+  "#login": "登录模块, 这是一个注释",
+  "username": "用户名",
+  "password": "密码",
+  "sign": "登录",
+  "loginTitle": "我的登录页",
+  "#register": "注册模块, 这是一个注释",
+  "register": "注册"
+}

@@ -34,5 +34,6 @@ module.exports = {
   ],
   'rules': {
     'linebreak-style': ['error', 'unix'],
+    'vue/multi-word-component-names': 'off',
   },
 };
