@@ -22,4 +22,14 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  // 设置代理服务
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
+  },
 });

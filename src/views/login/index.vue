@@ -1,15 +1,30 @@
-<script setup lang="ts">
-import { onMounted } from 'vue';
+<script lang="ts" setup>
+import { onMounted, reactive, ref } from 'vue';
+import { getCaptcha, login } from '@/api/login.ts';
+import { LoginForm } from '@/types';
 
-// get captcha
-const getCaptcha = () => {
-  console.log('get captcha');
+// define the svg captcha
+const svgCaptcha = ref('');
+// 获取验证码
+const getCaptchaSvg = async () => {
+  const { data } = await getCaptcha();
+  svgCaptcha.value = data.data;
+};
+// define the login form
+const loginForm = reactive<LoginForm>({
+  username: '',
+  password: '',
+  captcha: '',
+});
+// 登录
+const handleLogin = async () => {
+  const { data } = await login(loginForm);
+  console.log(data);
 };
 
 onMounted(() => {
-  getCaptcha();
+  getCaptchaSvg();
 });
-
 </script>
 <template>
   <div class="min-h-screen flex items-center justify-center bg-gray-50 sm:px-6 lg:px-8">
@@ -21,20 +36,20 @@ onMounted(() => {
       <form action="#" class="mt-8 space-y-6" method="POST">
         <div class="rounded-md shadow-sm space-y-4">
           <div>
-            <a-input :placeholder="$t('username')" />
+            <a-input v-model:value="loginForm.username" :placeholder="$t('username')" allow-clear size="large" />
           </div>
           <div>
-            <a-input :placeholder="$t('password')" type="password" />
+            <a-input-password v-model:value="loginForm.password" :placeholder="$t('password')" size="large" />
           </div>
           <!--          验证码-->
-          <div class="flex items-center">
-            <a-input :placeholder="$t('captcha')" />
-            <img alt="" src="../../assets/vue.svg" />
+          <div class="flex items-center space-x-1">
+            <a-input v-model:value="loginForm.captcha" :placeholder="$t('captcha')" allow-clear size="large" />
+            <div @click="getCaptchaSvg" v-html="svgCaptcha" />
           </div>
         </div>
 
         <div>
-          <a-button block type="primary">{{ $t('sign') }}</a-button>
+          <a-button block size="large" type="primary" @click="handleLogin">{{ $t('sign') }}</a-button>
         </div>
       </form>
     </div>
