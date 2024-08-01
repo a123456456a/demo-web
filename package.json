@@ -1,35 +1,44 @@
 {
-  "name": "demo-web",
-  "private": true,
-  "version": "0.0.0",
+  "name": "ruoyi",
+  "version": "3.8.8",
+  "description": "欢果管理系统",
+  "author": "欢果",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc && vite build",
+    "build:prod": "vite build",
+    "build:stage": "vite build --mode staging",
     "preview": "vite preview"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/y_project/RuoYi-Vue.git"
+  },
   "dependencies": {
-    "@types/node": "^20.11.30",
-    "ant-design-vue": "4.x",
-    "axios": "^1.6.8",
-    "vue": "^3.4.21",
-    "vue-i18n": "9",
-    "vue-router": "4"
+    "@element-plus/icons-vue": "2.3.1",
+    "@vueup/vue-quill": "1.2.0",
+    "@vueuse/core": "10.11.0",
+    "axios": "0.28.1",
+    "echarts": "5.5.1",
+    "element-plus": "2.7.6",
+    "file-saver": "2.0.5",
+    "fuse.js": "6.6.2",
+    "js-cookie": "3.0.5",
+    "jsencrypt": "3.3.2",
+    "nprogress": "0.2.0",
+    "pinia": "2.1.7",
+    "vue": "3.4.31",
+    "vue-cropper": "1.1.1",
+    "vue-router": "4.4.0"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^7.3.1",
-    "@typescript-eslint/parser": "^7.3.1",
-    "@vitejs/plugin-vue": "^5.0.4",
-    "autoprefixer": "^10.4.19",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-vue": "^9.23.0",
-    "postcss": "^8.4.38",
-    "prettier": "^3.2.5",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5.2.2",
-    "unplugin-vue-components": "^0.26.0",
-    "vite": "^5.2.0",
-    "vue-tsc": "^2.0.6"
+    "@vitejs/plugin-vue": "5.0.5",
+    "sass": "1.77.5",
+    "unplugin-auto-import": "0.17.6",
+    "vite": "5.3.2",
+    "vite-plugin-compression": "0.5.1",
+    "vite-plugin-svg-icons": "2.0.1",
+    "unplugin-vue-setup-extend-plus": "1.0.1"
   }
 }
