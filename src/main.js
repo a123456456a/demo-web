@@ -43,6 +43,9 @@ import ImagePreview from "@/components/ImagePreview"
 import TreeSelect from '@/components/TreeSelect'
 // 字典标签组件
 import DictTag from '@/components/DictTag'
+import { createI18n } from 'vue-i18n'
+import en from './locals/en'
+import zh from './locals/zh'
 
 const app = createApp(App)
 
@@ -73,6 +76,18 @@ app.use(elementIcons)
 app.component('svg-icon', SvgIcon)
 
 directive(app)
+
+// 国际化
+const messages = {
+  en,
+  zh
+}
+const i18n = createI18n({
+  legacy: false,
+  messages,
+  locale: 'zh'
+})
+app.use(i18n)
 
 // 使用element-plus 并且设置全局的大小
 app.use(ElementPlus, {
