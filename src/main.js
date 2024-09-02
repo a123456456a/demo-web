@@ -44,8 +44,10 @@ import TreeSelect from '@/components/TreeSelect'
 // 字典标签组件
 import DictTag from '@/components/DictTag'
 import { createI18n } from 'vue-i18n'
-import en from './locals/en'
-import zh from './locals/zh'
+
+// 国际化
+import en from './locals/en.json'
+import zh from './locals/zh.json'
 
 const app = createApp(App)
 
