@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 
+import './index.css' // tailwind css
 import Cookies from 'js-cookie'
-
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import locale from 'element-plus/es/locale/lang/zh-cn'
@@ -32,13 +32,13 @@ import Pagination from '@/components/Pagination'
 // 自定义表格工具组件
 import RightToolbar from '@/components/RightToolbar'
 // 富文本组件
-import Editor from "@/components/Editor"
+import Editor from '@/components/Editor'
 // 文件上传组件
-import FileUpload from "@/components/FileUpload"
+import FileUpload from '@/components/FileUpload'
 // 图片上传组件
-import ImageUpload from "@/components/ImageUpload"
+import ImageUpload from '@/components/ImageUpload'
 // 图片预览组件
-import ImagePreview from "@/components/ImagePreview"
+import ImagePreview from '@/components/ImagePreview'
 // 自定义树选择组件
 import TreeSelect from '@/components/TreeSelect'
 // 字典标签组件
@@ -82,12 +82,12 @@ directive(app)
 // 国际化
 const messages = {
   en,
-  zh
+  zh,
 }
 const i18n = createI18n({
   legacy: false,
   messages,
-  locale: 'zh'
+  locale: 'zh',
 })
 app.use(i18n)
 
@@ -95,7 +95,7 @@ app.use(i18n)
 app.use(ElementPlus, {
   locale: locale,
   // 支持 large、default、small
-  size: Cookies.get('size') || 'default'
+  size: Cookies.get('size') || 'default',
 })
 
 app.mount('#app')
