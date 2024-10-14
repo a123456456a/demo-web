@@ -1,7 +1,7 @@
 /**
-* v-copyText 复制文本内容
-* Copyright (c) 2022 ruoyi
-*/
+ * v-copyText 复制文本内容
+ * Copyright (c) 2022 ruoyi
+ */
 
 export default {
   beforeMount(el, { value, arg }) {
@@ -18,22 +18,22 @@ export default {
       el.addEventListener("click", handler);
       el.$destroyCopy = () => el.removeEventListener("click", handler);
     }
-  }
-}
+  },
+};
 
 function copyTextToClipboard(input, { target = document.body } = {}) {
-  const element = document.createElement('textarea');
+  const element = document.createElement("textarea");
   const previouslyFocusedElement = document.activeElement;
 
   element.value = input;
 
   // Prevent keyboard from showing on mobile
-  element.setAttribute('readonly', '');
+  element.setAttribute("readonly", "");
 
-  element.style.contain = 'strict';
-  element.style.position = 'absolute';
-  element.style.left = '-9999px';
-  element.style.fontSize = '12pt'; // Prevent zooming on iOS
+  element.style.contain = "strict";
+  element.style.position = "absolute";
+  element.style.left = "-9999px";
+  element.style.fontSize = "12pt"; // Prevent zooming on iOS
 
   const selection = document.getSelection();
   const originalRange = selection.rangeCount > 0 && selection.getRangeAt(0);
@@ -47,8 +47,8 @@ function copyTextToClipboard(input, { target = document.body } = {}) {
 
   let isSuccess = false;
   try {
-    isSuccess = document.execCommand('copy');
-  } catch { }
+    isSuccess = document.execCommand("copy");
+  } catch {}
 
   element.remove();
 

@@ -36,7 +36,7 @@ const { proxy } = getCurrentInstance();
 const quillEditorRef = ref();
 const uploadUrl = ref(import.meta.env.VITE_APP_BASE_API + "/common/upload"); // 上传的图片服务器地址
 const headers = ref({
-  Authorization: "Bearer " + getToken()
+  Authorization: "Bearer " + getToken(),
 });
 
 const props = defineProps({
@@ -68,7 +68,7 @@ const props = defineProps({
   type: {
     type: String,
     default: "url",
-  }
+  },
 });
 
 const options = ref({
@@ -78,20 +78,20 @@ const options = ref({
   modules: {
     // 工具栏配置
     toolbar: [
-      ["bold", "italic", "underline", "strike"],      // 加粗 斜体 下划线 删除线
-      ["blockquote", "code-block"],                   // 引用  代码块
-      [{ list: "ordered" }, { list: "bullet" }],      // 有序、无序列表
-      [{ indent: "-1" }, { indent: "+1" }],           // 缩进
-      [{ size: ["small", false, "large", "huge"] }],  // 字体大小
-      [{ header: [1, 2, 3, 4, 5, 6, false] }],        // 标题
-      [{ color: [] }, { background: [] }],            // 字体颜色、字体背景颜色
-      [{ align: [] }],                                // 对齐方式
-      ["clean"],                                      // 清除文本格式
-      ["link", "image", "video"]                      // 链接、图片、视频
+      ["bold", "italic", "underline", "strike"], // 加粗 斜体 下划线 删除线
+      ["blockquote", "code-block"], // 引用  代码块
+      [{ list: "ordered" }, { list: "bullet" }], // 有序、无序列表
+      [{ indent: "-1" }, { indent: "+1" }], // 缩进
+      [{ size: ["small", false, "large", "huge"] }], // 字体大小
+      [{ header: [1, 2, 3, 4, 5, 6, false] }], // 标题
+      [{ color: [] }, { background: [] }], // 字体颜色、字体背景颜色
+      [{ align: [] }], // 对齐方式
+      ["clean"], // 清除文本格式
+      ["link", "image", "video"], // 链接、图片、视频
     ],
   },
   placeholder: "请输入内容",
-  readOnly: props.readOnly
+  readOnly: props.readOnly,
 });
 
 const styles = computed(() => {
@@ -106,15 +106,19 @@ const styles = computed(() => {
 });
 
 const content = ref("");
-watch(() => props.modelValue, (v) => {
-  if (v !== content.value) {
-    content.value = v === undefined ? "<p></p>" : v;
-  }
-}, { immediate: true });
+watch(
+  () => props.modelValue,
+  (v) => {
+    if (v !== content.value) {
+      content.value = v === undefined ? "<p></p>" : v;
+    }
+  },
+  { immediate: true },
+);
 
 // 如果设置了上传地址则自定义图片上传事件
 onMounted(() => {
-  if (props.type == 'url') {
+  if (props.type == "url") {
     let quill = quillEditorRef.value.getQuill();
     let toolbar = quill.getModule("toolbar");
     toolbar.addHandler("image", (value) => {
@@ -156,7 +160,11 @@ function handleUploadSuccess(res, file) {
     // 获取光标位置
     let length = quill.selection.savedRange.index;
     // 插入图片，res.url为服务器返回的图片链接地址
-    quill.insertEmbed(length, "image", import.meta.env.VITE_APP_BASE_API + res.fileName);
+    quill.insertEmbed(
+      length,
+      "image",
+      import.meta.env.VITE_APP_BASE_API + res.fileName,
+    );
     // 调整光标到最后
     quill.setSelection(length + 1);
   } else {
@@ -174,7 +182,8 @@ function handleUploadError() {
 .editor-img-uploader {
   display: none;
 }
-.editor, .ql-toolbar {
+.editor,
+.ql-toolbar {
   white-space: pre-wrap !important;
   line-height: normal !important;
 }
