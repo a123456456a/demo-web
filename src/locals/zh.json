@@ -1,5 +1,9 @@
 {
   "login": {
     "username": "账户"
+  },
+  "route": {
+    "dashboard": "首页",
+    "profile": "个人中心"
   }
 }
