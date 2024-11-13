@@ -6,18 +6,18 @@
       :rules="registerRules"
       class="register-form"
     >
-      <h3 class="title">欢果后台管理系统</h3>
+      <h3 class="title">{{ t('register.title') }}</h3>
       <el-form-item prop="username">
         <el-input
           v-model="registerForm.username"
           type="text"
           size="large"
           auto-complete="off"
-          placeholder="账号"
+          :placeholder="t('register.username.placeholder')"
         >
-          <template #prefix
-            ><svg-icon icon-class="user" class="el-input__icon input-icon"
-          /></template>
+          <template #prefix>
+            <svg-icon icon-class="user" class="el-input__icon input-icon" />
+          </template>
         </el-input>
       </el-form-item>
       <el-form-item prop="password">
@@ -26,12 +26,12 @@
           type="password"
           size="large"
           auto-complete="off"
-          placeholder="密码"
+          :placeholder="t('register.password.placeholder')"
           @keyup.enter="handleRegister"
         >
-          <template #prefix
-            ><svg-icon icon-class="password" class="el-input__icon input-icon"
-          /></template>
+          <template #prefix>
+            <svg-icon icon-class="password" class="el-input__icon input-icon" />
+          </template>
         </el-input>
       </el-form-item>
       <el-form-item prop="confirmPassword">
@@ -40,26 +40,26 @@
           type="password"
           size="large"
           auto-complete="off"
-          placeholder="确认密码"
+          :placeholder="t('register.confirmPassword.placeholder')"
           @keyup.enter="handleRegister"
         >
-          <template #prefix
-            ><svg-icon icon-class="password" class="el-input__icon input-icon"
-          /></template>
+          <template #prefix>
+            <svg-icon icon-class="password" class="el-input__icon input-icon" />
+          </template>
         </el-input>
       </el-form-item>
       <el-form-item prop="code" v-if="captchaEnabled">
         <el-input
-          size="large"
           v-model="registerForm.code"
+          size="large"
           auto-complete="off"
-          placeholder="验证码"
+          :placeholder="t('register.captcha.placeholder')"
           style="width: 63%"
           @keyup.enter="handleRegister"
         >
-          <template #prefix
-            ><svg-icon icon-class="validCode" class="el-input__icon input-icon"
-          /></template>
+          <template #prefix>
+            <svg-icon icon-class="validCode" class="el-input__icon input-icon" />
+          </template>
         </el-input>
         <div class="register-code">
           <img :src="codeUrl" @click="getCode" class="register-code-img" />
@@ -73,19 +73,18 @@
           style="width: 100%"
           @click.prevent="handleRegister"
         >
-          <span v-if="!loading">注 册</span>
-          <span v-else>注 册 中...</span>
+          <span v-if="!loading">{{ t('register.button.register') }}</span>
+          <span v-else>{{ t('register.button.registering') }}</span>
         </el-button>
         <div style="float: right">
-          <router-link class="link-type" :to="'/login'"
-            >使用已有账户登录</router-link
-          >
+          <router-link class="link-type" :to="'/login'">
+            {{ t('register.button.login') }}
+          </router-link>
         </div>
       </el-form-item>
     </el-form>
-    <!--  底部  -->
     <div class="el-register-footer">
-      <span>Copyright © 2018-2024 ruoyi.vip All Rights Reserved.</span>
+      <span>{{ t('register.footer.copyright') }}</span>
     </div>
   </div>
 </template>
@@ -93,7 +92,9 @@
 <script setup>
 import { ElMessageBox } from "element-plus";
 import { getCodeImg, register } from "@/api/login";
+import { useI18n } from "vue-i18n";
 
+const { t } = useI18n();
 const router = useRouter();
 const { proxy } = getCurrentInstance();
 
@@ -107,7 +108,7 @@ const registerForm = ref({
 
 const equalToPassword = (rule, value, callback) => {
   if (registerForm.value.password !== value) {
-    callback(new Error("两次输入的密码不一致"));
+    callback(new Error(t('register.password.notMatch')));
   } else {
     callback();
   }
@@ -115,33 +116,33 @@ const equalToPassword = (rule, value, callback) => {
 
 const registerRules = {
   username: [
-    { required: true, trigger: "blur", message: "请输入您的账号" },
+    { required: true, trigger: "blur", message: t('register.username.required') },
     {
       min: 2,
       max: 20,
-      message: "用户账号长度必须介于 2 和 20 之间",
+      message: t('register.username.length'),
       trigger: "blur",
     },
   ],
   password: [
-    { required: true, trigger: "blur", message: "请输入您的密码" },
+    { required: true, trigger: "blur", message: t('register.password.required') },
     {
       min: 5,
       max: 20,
-      message: "用户密码长度必须介于 5 和 20 之间",
+      message: t('register.password.length'),
       trigger: "blur",
     },
     {
       pattern: /^[^<>"'|\\]+$/,
-      message: "不能包含非法字符：< > \" ' \\\ |",
+      message: t('register.password.invalid'),
       trigger: "blur",
     },
   ],
   confirmPassword: [
-    { required: true, trigger: "blur", message: "请再次输入您的密码" },
+    { required: true, trigger: "blur", message: t('register.confirmPassword.required') },
     { required: true, validator: equalToPassword, trigger: "blur" },
   ],
-  code: [{ required: true, trigger: "change", message: "请输入验证码" }],
+  code: [{ required: true, trigger: "change", message: t('register.captcha.required') }],
 };
 
 const codeUrl = ref("");
@@ -156,10 +157,8 @@ function handleRegister() {
         .then((res) => {
           const username = registerForm.value.username;
           ElMessageBox.alert(
-            "<font color='red'>恭喜你，您的账号 " +
-              username +
-              " 注册成功！</font>",
-            "系统提示",
+            t('register.success.message', { username }),
+            t('register.success.title'),
             {
               dangerouslyUseHTMLString: true,
               type: "success",

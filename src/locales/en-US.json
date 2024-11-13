@@ -1,0 +1,70 @@
+{
+  "register": {
+    "title": "Welcome to Admin System",
+    "username": {
+      "placeholder": "Username",
+      "required": "Please enter your username",
+      "length": "Username length must be between 2 and 20 characters"
+    },
+    "password": {
+      "placeholder": "Password",
+      "required": "Please enter your password",
+      "length": "Password length must be between 5 and 20 characters",
+      "invalid": "Cannot contain illegal characters: < > \" ' \\ |",
+      "notMatch": "The two passwords do not match"
+    },
+    "confirmPassword": {
+      "placeholder": "Confirm Password",
+      "required": "Please confirm your password"
+    },
+    "captcha": {
+      "placeholder": "Verification Code",
+      "required": "Please enter verification code"
+    },
+    "button": {
+      "register": "Register",
+      "registering": "Registering...",
+      "login": "Login with existing account"
+    },
+    "success": {
+      "title": "System Prompt",
+      "message": "Congratulations, your account {username} has been registered successfully!"
+    },
+    "footer": {
+      "copyright": "Copyright © 2018-2024 ruoyi.vip All Rights Reserved."
+    }
+  },
+  "navbar": {
+    "doc": "Documentation",
+    "layoutSize": "Layout Size",
+    "profile": "Profile",
+    "layoutSettings": "Layout Settings",
+    "logout": "Logout",
+    "logoutConfirm": "Are you sure you want to log out of the system?",
+    "tips": "Tips",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "search": "Search",
+    "screenfull": "Full Screen",
+    "language": "Language"
+  },
+  "route": {
+    "dashboard": "Dashboard",
+    "profile": "Profile"
+  },
+  "tagsView": {
+    "refresh": "Refresh",
+    "close": "Close",
+    "closeOthers": "Close Others",
+    "closeAll": "Close All"
+  },
+  "settings": {
+    "title": "System Layout Configuration",
+    "theme": "Theme Color",
+    "tagsView": "Enable Tags-View",
+    "fixedHeader": "Fixed Header",
+    "sidebarLogo": "Sidebar Logo",
+    "dynamicTitle": "Dynamic Title",
+    "topNav": "Top Navigation"
+  }
+} 

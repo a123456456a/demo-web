@@ -13,19 +13,43 @@
       <template v-if="appStore.device !== 'mobile'">
         <header-search id="header-search" class="right-menu-item" />
 
-        <el-tooltip content="源码地址" effect="dark" placement="bottom">
-          <ruo-yi-git id="ruoyi-git" class="right-menu-item hover-effect" />
-        </el-tooltip>
-
-        <el-tooltip content="文档地址" effect="dark" placement="bottom">
+        <el-tooltip :content="$t('navbar.doc')" effect="dark" placement="bottom">
           <ruo-yi-doc id="ruoyi-doc" class="right-menu-item hover-effect" />
         </el-tooltip>
 
         <screenfull id="screenfull" class="right-menu-item hover-effect" />
 
-        <el-tooltip content="布局大小" effect="dark" placement="bottom">
+        <el-tooltip :content="$t('navbar.layoutSize')" effect="dark" placement="bottom">
           <size-select id="size-select" class="right-menu-item hover-effect" />
         </el-tooltip>
+
+        <el-dropdown 
+          trigger="click" 
+          class="right-menu-item hover-effect international" 
+          @command="handleSetLanguage"
+        >
+          <div class="language-icon">
+            <svg-icon icon-class="language" />
+          </div>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item 
+                :disabled="language === 'zh-cn'" 
+                command="zh-cn"
+                class="language-item"
+              >
+                <span class="language-text">简体中文</span>
+              </el-dropdown-item>
+              <el-dropdown-item 
+                :disabled="language === 'en'" 
+                command="en"
+                class="language-item"
+              >
+                <span class="language-text">English</span>
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
       </template>
       <div class="avatar-container">
         <el-dropdown @command="handleCommand" class="right-menu-item hover-effect" trigger="click">
@@ -36,13 +60,13 @@
           <template #dropdown>
             <el-dropdown-menu>
               <router-link to="/user/profile">
-                <el-dropdown-item>个人中心</el-dropdown-item>
+                <el-dropdown-item>{{ $t('navbar.profile') }}</el-dropdown-item>
               </router-link>
               <el-dropdown-item command="setLayout" v-if="settingsStore.showSettings">
-                <span>布局设置</span>
+                <span>{{ $t('navbar.layoutSettings') }}</span>
               </el-dropdown-item>
               <el-dropdown-item divided command="logout">
-                <span>退出登录</span>
+                <span>{{ $t('navbar.logout') }}</span>
               </el-dropdown-item>
             </el-dropdown-menu>
           </template>
@@ -54,6 +78,7 @@
 
 <script setup>
 import { ElMessageBox } from 'element-plus';
+import { useI18n } from 'vue-i18n';
 import Breadcrumb from '@/components/Breadcrumb';
 import TopNav from '@/components/TopNav';
 import Hamburger from '@/components/Hamburger';
@@ -66,9 +91,12 @@ import useAppStore from '@/store/modules/app';
 import useUserStore from '@/store/modules/user';
 import useSettingsStore from '@/store/modules/settings';
 
+const { t, locale } = useI18n();
 const appStore = useAppStore();
 const userStore = useUserStore();
 const settingsStore = useSettingsStore();
+
+const language = computed(() => locale.value);
 
 function toggleSideBar() {
   appStore.toggleSideBar();
@@ -88,9 +116,9 @@ function handleCommand(command) {
 }
 
 function logout() {
-  ElMessageBox.confirm('确定注销并退出系统吗？', '提示', {
-    confirmButtonText: '确定',
-    cancelButtonText: '取消',
+  ElMessageBox.confirm(t('navbar.logoutConfirm'), t('navbar.tips'), {
+    confirmButtonText: t('navbar.confirm'),
+    cancelButtonText: t('navbar.cancel'),
     type: 'warning',
   })
     .then(() => {
@@ -105,6 +133,13 @@ const emits = defineEmits(['setLayout']);
 function setLayout() {
   emits('setLayout');
 }
+
+// 语言切换处理函数
+const handleSetLanguage = (lang) => {
+  locale.value = lang;
+  // 可选：持久化语言设置
+  localStorage.setItem('language', lang);
+};
 </script>
 
 <style lang="scss" scoped>
@@ -193,6 +228,48 @@ function setLayout() {
         }
       }
     }
+
+    .international {
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      cursor: pointer;
+      
+      .language-icon {
+        font-size: 18px;
+        color: #5a5e66;
+        vertical-align: middle;
+      }
+    }
   }
+}
+
+:deep(.language-item) {
+  padding: 8px 16px;
+  
+  .language-text {
+    font-size: 14px;
+    color: #606266;
+  }
+
+  &:hover {
+    background-color: #f5f7fa;
+  }
+
+  &.is-disabled {
+    color: #bbb;
+    cursor: not-allowed;
+    background-color: #fff;
+    
+    .language-text {
+      color: #bbb;
+    }
+  }
+}
+
+:deep(.el-dropdown-menu) {
+  padding: 4px 0;
+  border-radius: 4px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 </style>

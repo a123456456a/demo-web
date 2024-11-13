@@ -1,0 +1,70 @@
+{
+  "register": {
+    "title": "欢果后台管理系统",
+    "username": {
+      "placeholder": "账号",
+      "required": "请输入您的账号",
+      "length": "用户账号长度必须介于 2 和 20 之间"
+    },
+    "password": {
+      "placeholder": "密码",
+      "required": "请输入您的密码",
+      "length": "用户密码长度必须介于 5 和 20 之间",
+      "invalid": "不能包含非法字符：< > \" ' \\ |",
+      "notMatch": "两次输入的密码不一致"
+    },
+    "confirmPassword": {
+      "placeholder": "确认密码",
+      "required": "请再次输入您的密码"
+    },
+    "captcha": {
+      "placeholder": "验证码",
+      "required": "请输入验证码"
+    },
+    "button": {
+      "register": "注 册",
+      "registering": "注 册 中...",
+      "login": "使用已有账户登录"
+    },
+    "success": {
+      "title": "系统提示",
+      "message": "恭喜你，您的账号 {username} 注册成功！"
+    },
+    "footer": {
+      "copyright": "Copyright © 2018-2024 ruoyi.vip All Rights Reserved."
+    }
+  },
+  "navbar": {
+    "doc": "文档",
+    "layoutSize": "布局大小",
+    "profile": "个人中心",
+    "layoutSettings": "布局设置",
+    "logout": "退出登录",
+    "logoutConfirm": "确定注销并退出系统吗？",
+    "tips": "提示",
+    "confirm": "确定",
+    "cancel": "取消",
+    "search": "搜索",
+    "screenfull": "全屏显示",
+    "language": "语言"
+  },
+  "route": {
+    "dashboard": "首页",
+    "profile": "个人中心"
+  },
+  "tagsView": {
+    "refresh": "刷新",
+    "close": "关闭",
+    "closeOthers": "关闭其它",
+    "closeAll": "关闭所有"
+  },
+  "settings": {
+    "title": "系统布局配置",
+    "theme": "主题色",
+    "tagsView": "开启 Tags-View",
+    "fixedHeader": "固定 Header",
+    "sidebarLogo": "侧边栏 Logo",
+    "dynamicTitle": "动态标题",
+    "topNav": "顶部导航"
+  }
+} 

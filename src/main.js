@@ -53,8 +53,8 @@ import DictTag from "@/components/DictTag";
 import { createI18n } from "vue-i18n";
 
 // 国际化
-import en from "./locals/en.json";
-import zh from "./locals/zh.json";
+import en from "./locales/en-US.json";
+import zh from "./locales/zh-CN.json";
 
 const app = createApp(App);
 
